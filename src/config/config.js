@@ -1,0 +1,1 @@
+export const URL_link = process.env.URL_link || ''

@@ -1,0 +1,18 @@
+.info-top-inicio{
+    display: flex;
+    /* background-color: red; */
+    height: 60vh;
+}
+
+.info-top-inicio p{
+    padding: 2em 2%;
+    width: 60%;
+    text-align: justify;
+}
+.info-top-inicio div{
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+    width: auto;
+}
+.info-top-inicio div img{
+    height: 100%;
+}

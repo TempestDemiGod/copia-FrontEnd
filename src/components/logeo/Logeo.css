@@ -1,0 +1,121 @@
+.contenedor{
+    overflow: hidden;
+    background-color: #01091C;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+.logo-login{
+    width: 8vw;
+    margin: 0 auto;
+    margin-top: 1vw;
+}
+.logo-login img{
+    width: 100%;
+}
+.imagen{
+    width: 54vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(80%);
+}
+.imagen img{
+    width: 60%;
+    z-index: 1;
+    animation: movimiento 1.4s alternate infinite ease-in;
+}
+.luz{
+    width: 34vw;
+    margin-bottom: 10vw;
+    height: 34vw;
+    background: radial-gradient(rgba(212, 215, 44, 0.4) 10px, rgba(44, 209, 215, 0.4) 60%, #01091C 20%);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
+    box-shadow: 0 0 1000px #fefefe ;
+    
+}
+.punto{
+    width: 17vw;
+    height: 17vw;
+    border-radius: 50%;
+    background-color: rgba(44, 209, 215, 0.4);
+    box-shadow: 0 0 1000px #ffffff ;
+  
+}
+.form-container{
+    background-color: rgb(244, 244, 245);
+    width: 46vw;
+    height: 100vh;
+    border-radius: 2vw 0 0 2vw;
+}
+.btn-logeo{
+    margin-top: 2vw;
+    color: white;
+    letter-spacing: 0.2em;
+    word-spacing: 4rem;
+    background-color: rgb(34, 191, 197);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border: none;
+    box-sizing: border-box;
+    border-radius: .6vw;
+    width: 14vw;
+    height: 2.3vw;
+    font-size: 1.4vw;
+    transition: background-color, ease 2s;
+}
+span{
+    display: block;
+    width: max-content;
+    margin: 0 auto;
+}
+@keyframes movimiento {
+    0%{
+        transform: translateY(-4%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+
+/* cambio de posicion */
+
+@media screen and (max-width: 800px){
+    .logo-login{
+        width: 12vw;
+        height: 12vw;
+        /* background-color: red; */
+        transform: translateY(-46px);
+        filter: drop-shadow(0px 0px 20px rgb(130, 205, 234));
+    }
+    .logo-login img{
+        width: 100%;
+    }
+    .contenedor{
+        align-items: center;
+        justify-content: center;
+    }
+    .imagen{
+        display: none;
+    }
+    .form-container{
+        background-color: rgb(244, 244, 245);
+        width: 60vw;
+        height: 90vh;
+        border-radius: 2vw 2vw 2vw 2vw;
+        box-shadow: 0 0 60px rgb(74, 211, 188);
+    }
+}
+
+@media screen and (max-height: 600px){
+    span{
+        transform: translatey(-4vh);
+    }
+}
+

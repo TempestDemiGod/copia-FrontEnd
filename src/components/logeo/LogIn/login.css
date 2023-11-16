@@ -1,0 +1,34 @@
+.contenedor-form{
+    width: 40vw;
+    margin: 0 auto;
+}
+.hola-01{
+    text-align: center;
+}
+.contenedor-form h1{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: #424242;
+    
+}
+@media screen and (max-height: 600px){
+    .hola-01{
+        width: 80%;
+        padding: 0 2%;
+        height: 60%;
+        overflow-x: hidden;
+        overflow-y: scroll ;
+    }
+    .hola-01::-webkit-scrollbar{
+        width: .2em;
+        opacity: 0.3;
+    }
+    .hola-01::-webkit-scrollbar-track{
+        background: rgb(244, 244, 245);
+        
+    }
+    .hola-01::-webkit-scrollbar-thumb{
+        background-color: #efe1b8;
+        border-radius: 4rem;
+    }
+}

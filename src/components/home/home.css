@@ -1,0 +1,160 @@
+.total{
+    height: 100vh;
+    width: 100vw;
+}
+.contendor-second{
+    width: 100vw;
+    height: 100%;
+}
+.navBar{
+    height: 7%;
+    position: relative;
+    z-index: 3;
+}
+.contendor{
+    width: 100vw;
+    height: 93%;
+    display: flex;
+}
+.menu-projects{
+    width: 14vw;
+    color: rgb(255, 255, 255);
+    font-size: 1vw;
+    background-color: rgb(230, 92, 46);
+    text-align: center;
+}
+.title{
+    backdrop-filter: blur(.4vw);
+    padding: 1.4vh 0;
+    font-size: 2vw;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+.main-contenido{
+    width: 86vw;
+    overflow-x: hidden;
+    overflow-y: scroll ;
+}
+.main-contenido::-webkit-scrollbar{
+    width: .2em;
+    opacity: 0.3;
+}
+.main-contenido::-webkit-scrollbar-track{
+    background: rgb(230, 92, 46);
+    
+}
+.main-contenido::-webkit-scrollbar-thumb{
+    background-color: #e7af06;
+    border-radius: 4rem;
+}
+.projects{
+    box-sizing: border-box;
+    height: 40vh;
+    width: 96%;
+    background-color: rgb(255, 176, 150);
+    margin: 10% auto;
+    position: relative;
+    z-index: 2;
+    border-radius: 1vw;
+    overflow-x: hidden;
+    overflow-y: scroll ;
+}
+.projects::-webkit-scrollbar{
+    width: .2em;
+    opacity: 0.3;
+}
+.projects::-webkit-scrollbar-track{
+    background: rgb(230, 92, 46);
+    
+}
+.projects::-webkit-scrollbar-thumb{
+    background-color: rgb(231, 201, 191);
+    border-radius: 4rem;
+}
+.btn-addProject{
+    margin: 0;
+    padding: 0;
+    border: none;
+    position: relative;
+    z-index: 2;
+    margin-top: 10%;
+    width: 80%;
+    height: 6%;
+    color: rgb(216, 134, 84);
+    font-weight: bold;
+    background-color: rgb(255, 176, 150);
+    border-radius: .6vw;
+    transition: background-color 1s ease;
+}
+.btn-addProject:hover{
+    color: white;
+    background-color: rgb(255, 117, 72);
+    box-shadow: 0 0 1vw white;
+}
+.logo-home{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 6%;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 1vw black);
+}
+.logo-home img{
+    width:  100%;
+}
+.projectButton{
+    width: 100%;
+    background-color: rgb(251, 145, 116);
+    color: rgb(230, 92, 46);
+    font-weight: bold;
+    border: none;
+    margin-bottom: .1vw;
+    font-size: 1vw;
+    min-height: 2.4vw;
+    transition: all 1.4s ease;
+}
+.projectButton:hover{
+    background-color: #FF4E27;
+    color: white;
+
+}
+/* efects */
+.line{
+    top: 0;
+    width: .5vw;
+    height: 40%;
+    border-radius: 4vw;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    z-index: 1;
+    margin-left: 6.8vw;
+}
+
+/* media querys */
+@media screen and (max-width: 1200px){
+    .menu-projects{
+        width: 8vw;
+        background-color: rgb(46, 230, 104);
+    }
+    .main-contenido{
+        width: 92vw;
+        background-color: red;
+    }
+    .logo-home{
+        width: 90%;
+        margin-top: 6%;
+        filter: drop-shadow(0 0 1vw black);
+    }
+    .line{
+        top: 0;
+        width: .5vw;
+        height: 40%;
+        border-radius: 4vw;
+        background-color: rgb(255, 255, 255);
+        position: absolute;
+        z-index: 1;
+        margin-left: 3.8vw;
+    }
+}
+

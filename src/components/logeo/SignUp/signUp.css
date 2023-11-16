@@ -1,0 +1,26 @@
+@media screen and (max-height: 710px){
+    .hola-02{
+        width: 80%;
+        padding: 0 2%;
+        height: 76%;
+        overflow-x: hidden;
+        overflow-y: scroll ;
+    }
+    .hola-02::-webkit-scrollbar{
+        width: .2em;
+        opacity: 0.3;
+    }
+    .hola-02::-webkit-scrollbar-track{
+        background: rgb(244, 244, 245);
+        
+    }
+    .hola-02::-webkit-scrollbar-thumb{
+        background-color: #efe1b8;
+        border-radius: 4rem;
+    }
+}
+@media screen and (max-height: 480px){
+    .hola-02{
+        height: 50%;
+    }
+}
