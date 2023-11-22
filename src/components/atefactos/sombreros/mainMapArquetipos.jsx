@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Mermaid from "../../utils/Mermaid";
-import { UpDateArtifact, listadoProject, registerArtifact } from '../../utils/artifact';
-import { listado } from "../../utils/proyects";
+import Mermaid from "../../../utils/Mermaid";
+import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
+// import { listado } from "../../utils/proyects";
 
 let idProject
 let apikey
@@ -75,7 +75,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
       <div className="outer">
         <div>
           <div>Prompt de entrada</div>
-          <div className="textarea">
+          <div className="textarea text-extendido">
             <textarea
               id="prompt"
               name="prompt"
@@ -86,7 +86,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
         </div>
         <div>
           <div>Salida</div>
-          <div className="textarea">
+          <div className="textarea text-extendido">
             <textarea
               value={result}
               onChange={(e) => setResult(e.target.value)}
@@ -94,8 +94,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
       </div>
-      <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
-      <Mermaid key={result ? result.length : 0} chart={result} />
+      <button  className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
     </div>
   );
 }
@@ -165,8 +164,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="model">Motor GPT:</label>
         <select
           name="model"
-          id="model"
           className="form-control bg-dark text-white mb-3"
+          id="model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
         >
@@ -215,7 +214,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -236,7 +235,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -249,7 +248,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'brainstorming'
+    let nombre = 'Mapa seis sombreros'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -267,61 +266,35 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-brainstorming mindmap
-mindmap
-\t\troot(("leisure activities weekend"))
-\t\t\t\t["spend time with friends"]
-\t\t\t\t::icon(fafa fa-users)
-\t\t\t\t\t\t("action activities")
-\t\t\t\t\t\t::icon(fafa fa-play)
-\t\t\t\t\t\t\t\t("dancing at night club")
-\t\t\t\t\t\t\t\t("going to a restaurant")
-\t\t\t\t\t\t\t\t("go to the theater")
-\t\t\t\t["spend time your self"]
-\t\t\t\t::icon(fa fa-fa-user)
-\t\t\t\t\t\t("meditation")
-\t\t\t\t\t\t::icon(fa fa-om)
-\t\t\t\t\t\t("\`take a sunbath ☀️\`")
-\t\t\t\t\t\t("reading a book")
-\t\t\t\t\t\t::icon(fa fa-book)
-text summary mindmap:
-mindmap
-\troot("Barack Obama")
-\t\t("Born August 4, 1961")
-\t\t::icon(fa fa-baby-carriage)
-\t\t("American Politician")
-\t\t\t::icon(fa fa-flag)
-\t\t\t\t("44th President of the United States")
-\t\t\t\t\t("2009 - 2017")
-\t\t("Democratic Party")
-\t\t\t::icon(fa fa-democrat)
-\t\t("First African-American President")
-cause and effects mindmap:
-mindmap
-\troot("Landlord sells apartment")
-\t\t::icon(fa fa-sell)
-\t\t("Renter must be notified of sale")
-\t\t::icon(fa fa-envelope)
-\t\t\t("Tenants may feel some uncertainty")
-\t\t\t::icon(fa fa-question-circle)
-\t\t("Notice periods must be observed")
-\t\t::icon(fa fa-calendar)
-\t\t\t("Landlord can submit notice of termination for personal use")
-\t\t\t::icon(fa fa-home)
-\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t::icon(fa fa-search)
-\t\t("New owner")
-\t\t::icon(fa fa-user)
-\t\t\t\t("New owner takes over existing rental agreement")
-\t\t\t\t::icon(fa fa-file-contract)
-\t\t\t\t\t\t("Tenant keeps previous apartment")
-\t\t\t\t\t\t::icon(fa fa-handshake)
-\t\t\t\t("New owner terminates newly concluded lease")
-\t\t\t\t::icon(fa fa-ban)
-\t\t\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+      `Usa la tecnica de los 6 sombreros basado en las aportaciones del usuario como estos ejemplos:
+
+      Tecnica de los seis sombreros para pensar:
+      \t\tSombrero Blanco (Hechos y Datos):
+      \t\t\t\tContamos con datos objetivos que respaldan nuestra estrategia en Lean Startup, como el rápido aumento en la adopción de asistentes virtuales en entornos empresariales, según estudios de mercado recientes.
+      \t\t\t\tLas métricas de negocio respaldan nuestro enfoque actual, ya que hemos experimentado una mejora del 30% en la eficiencia del equipo desde la implementación del asistente virtual.
+      \t\t\t\tLa evidencia concreta de que nuestra hipótesis está siendo validada se refleja en la reducción del tiempo dedicado a tareas administrativas, liberando recursos para actividades más estratégicas.
+      \t\tSombrero Rojo (Emociones e Intuición):
+      \t\t\t\tEl equipo se siente entusiasmado y motivado por la dirección actual del proyecto en Lean Startup, ya que ven resultados tangibles que mejoran su día a día.
+      \t\t\t\tLa intuición general es positiva, respaldada por la retroalimentación emocional del equipo, quienes perciben el asistente virtual como una herramienta valiosa para la gestión de proyectos.
+      \t\t\t\tLas emociones positivas, como la satisfacción por la simplificación de procesos, influyen en nuestras decisiones, fortaleciendo el compromiso con la estrategia actual.
+      \t\tSombrero Negro (Pensamiento Crítico):
+      \t\t\t\tIdentificamos posibles obstáculos, como la resistencia al cambio entre algunos miembros del equipo, que podrían afectar la implementación del asistente virtual.
+      \t\t\t\tReconocemos los posibles problemas futuros, como desafíos de integración con otras plataformas, y estamos preparados para abordarlos proactivamente.
+      \t\t\t\t Al evaluar nuestra estrategia, tenemos en cuenta aspectos negativos como posibles brechas de seguridad, asegurando una implementación sólida y confiable.
+      \t\tSombrero Amarillo (Pensamiento Positivo):
+      \t\t\t\tLas oportunidades de continuar con nuestra estrategia actual incluyen la posibilidad de mejorar aún más la productividad y la calidad del trabajo, consolidando nuestra posición en el mercado.
+      \t\t\t\tAspectos positivos derivados de Lean Startup son la optimización de recursos y la capacidad de adaptación rápida a cambios en el entorno empresarial.
+      \t\t\t\tNuestras ventajas sobre otras alternativas incluyen la personalización del asistente virtual para cumplir con los requisitos específicos de la gestión de proyectos.
+      \t\tSombrero Verde (Creatividad e Ideas):
+      \t\t\t\tGeneramos ideas innovadoras, como la incorporación de funciones de aprendizaje automático para anticipar las necesidades del equipo y ofrecer sugerencias proactivas.
+      \t\t\t\tAbordamos desafíos actuales de manera diferente explorando la integración de interfaces de voz para una interacción más intuitiva con el asistente virtual.
+      \t\t\t\tSoluciones creativas incluyen el desarrollo de una interfaz de usuario altamente intuitiva y la exploración de integraciones con herramientas de gestión de proyectos de última generación.
+      \t\tSombrero Azul (Gestión del Proceso):
+      \t\t\t\tOrganizamos la discusión de manera efectiva, estableciendo reuniones periódicas de revisión de avances y retroalimentación para garantizar la alineación del equipo.
+      \t\t\t\tEl plan de acción incluye la implementación gradual de nuevas funcionalidades del asistente virtual, con evaluaciones regulares para ajustar la estrategia según sea necesario.
+      \t\t\t\tGarantizamos la alineación del equipo mediante la comunicación abierta y la formación continua para aprovechar al máximo las capacidades del asistente virtual.
+
+      Solo una raíz, deja el titulo como encabezado y respeta la jerarquia de los sobreros Y responde cada pregunta plateada, No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -345,7 +318,7 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
         },
         {
           role: "assistant",
-          content: "Realiza sugerencias innovadoras para dar solución al tema plateado teniendo como base el framework Lean StartUp del tema:" + prompt
+          content: "Realiza la tecnica de los 6 sombreros para pensar teniendo como enfoque dar una solución al tema:" + prompt + "Atravez de ideas inovadoras."
         }
       ],
       stream: true,

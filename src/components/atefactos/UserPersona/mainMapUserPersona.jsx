@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Mermaid from "../../utils/Mermaid";
-import { UpDateArtifact, listadoProject, registerArtifact } from '../../utils/artifact';
-import { listado } from "../../utils/proyects";
+import Mermaid from "../../../utils/Mermaid";
+import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
+// import { listado } from "../../utils/proyects";
 
 let idProject
 let apikey
@@ -22,60 +22,14 @@ async function verProyecto(){
   console.log(proyecto.data.tema)
 }
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
-  // const getTema = async () => {
-  //   try {
-  //     const tema = await listado();
-  //     setProyecto(tema.data);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
 
-  // useEffect(() => {
-    
-  //   getTema();
-
-  // }, []);
-
-
-  // const [nombre, setNombre] = useState('')
-  // const [prompts, setPrompts] = useState('')
-  // const [respuesta, setRespuesta] = useState('')
-
-  // const handleNombre = (e) => {
-  //   setNombre(e.target.value)
-  //   console.log(nombre);
-  // }
-
-  // const handlePrompts = (e) => {
-  // setPrompts(e.target.value)
-  // console.log(prompts);
-  // }
-
-  // const handleRespuesta = (e) => {
-  //     setRespuesta(e.target.value)
-  //     console.log(respuesta);
-  // }
-
-  // const onSubmit = async (e) => {
-  //     e.preventDefault();
-  //     const data = {
-  //         nombre,
-  //         prompts,
-  //         respuesta,
-          
-  //     }
-  //     const res = await registerArtifact(data)
-  //     console.log(data)
-  //     console.log(res)
-  //   };
 
   return (
     <div className="App">
       <div className="outer">
         <div>
           <div>Prompt de entrada</div>
-          <div className="textarea">
+          <div className="textarea text-extendido">
             <textarea
               id="prompt"
               name="prompt"
@@ -86,7 +40,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
         </div>
         <div>
           <div>Salida</div>
-          <div className="textarea">
+          <div className="textarea text-extendido">
             <textarea
               value={result}
               onChange={(e) => setResult(e.target.value)}
@@ -95,7 +49,6 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
         </div>
       </div>
       <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
-      <Mermaid key={result ? result.length : 0} chart={result} />
     </div>
   );
 }
@@ -204,8 +157,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="promptTemplate"
+          className="form-control bg-dark text-white mb-3"
           name="promptTemplate"
           value={promptTemplate}
           onChange={handlePromptTemplateChange}
@@ -215,7 +168,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapUserPersona({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -236,7 +189,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -249,7 +202,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'brainstorming'
+    let nombre = 'User Persona'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -267,61 +220,49 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-brainstorming mindmap
-mindmap
-\t\troot(("leisure activities weekend"))
-\t\t\t\t["spend time with friends"]
-\t\t\t\t::icon(fafa fa-users)
-\t\t\t\t\t\t("action activities")
-\t\t\t\t\t\t::icon(fafa fa-play)
-\t\t\t\t\t\t\t\t("dancing at night club")
-\t\t\t\t\t\t\t\t("going to a restaurant")
-\t\t\t\t\t\t\t\t("go to the theater")
-\t\t\t\t["spend time your self"]
-\t\t\t\t::icon(fa fa-fa-user)
-\t\t\t\t\t\t("meditation")
-\t\t\t\t\t\t::icon(fa fa-om)
-\t\t\t\t\t\t("\`take a sunbath ☀️\`")
-\t\t\t\t\t\t("reading a book")
-\t\t\t\t\t\t::icon(fa fa-book)
-text summary mindmap:
-mindmap
-\troot("Barack Obama")
-\t\t("Born August 4, 1961")
-\t\t::icon(fa fa-baby-carriage)
-\t\t("American Politician")
-\t\t\t::icon(fa fa-flag)
-\t\t\t\t("44th President of the United States")
-\t\t\t\t\t("2009 - 2017")
-\t\t("Democratic Party")
-\t\t\t::icon(fa fa-democrat)
-\t\t("First African-American President")
-cause and effects mindmap:
-mindmap
-\troot("Landlord sells apartment")
-\t\t::icon(fa fa-sell)
-\t\t("Renter must be notified of sale")
-\t\t::icon(fa fa-envelope)
-\t\t\t("Tenants may feel some uncertainty")
-\t\t\t::icon(fa fa-question-circle)
-\t\t("Notice periods must be observed")
-\t\t::icon(fa fa-calendar)
-\t\t\t("Landlord can submit notice of termination for personal use")
-\t\t\t::icon(fa fa-home)
-\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t::icon(fa fa-search)
-\t\t("New owner")
-\t\t::icon(fa fa-user)
-\t\t\t\t("New owner takes over existing rental agreement")
-\t\t\t\t::icon(fa fa-file-contract)
-\t\t\t\t\t\t("Tenant keeps previous apartment")
-\t\t\t\t\t\t::icon(fa fa-handshake)
-\t\t\t\t("New owner terminates newly concluded lease")
-\t\t\t\t::icon(fa fa-ban)
-\t\t\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+      `Cree un User Persona basado en las aportaciones del usuario como estos ejemplos:
+       User Persona:
+       \t\tNombre: José García
+       \t\t\t\tDemografía:
+       \t\t\t\t\t\tEdad: 28 años
+       \t\t\t\tGénero: Masculino
+       \t\t\t\tUbicación: Trujillo, Perú
+       \t\t\t\tNivel de Educación: Estudiante universitario a punto de graduarse
+       \t\t\t\tDatos de trabajo:
+       \t\t\t\t\t\tOcupación: Estudiante de Ingeniería de Sistemas
+       \t\t\t\t\t\tEmpresa: Proyectos Innovadores SAC (pasante)
+       \t\t\t\t\t\tNivel de experiencia: Prácticas profesionales en gestión de proyectos
+       \t\t\t\tDesafíos y necesidades:
+       \t\t\t\t\t\tDesafío: Coordinar eficientemente tareas y plazos en proyectos complejos.
+       \t\t\t\t\t\tNecesidad: Una herramienta que simplifique la gestión de proyectos y mejore la colaboración en equipos distribuidos.
+       \t\t\t\tObjetivos y deseos:
+       \t\t\t\t\t\tObjetivo Profesional: Destacar en su pasantía y obtener habilidades sólidas en la gestión de proyectos.
+       \t\t\t\t\t\tDeseo Personal: Lograr un equilibrio entre el trabajo y los estudios sin comprometer la calidad de su desempeño.
+       \t\t\t\tComportamiento de compra:
+       \t\t\t\t\t\tInvestiga en blogs y redes sociales sobre herramientas de gestión de proyectos.
+       \t\t\t\t\t\tPrefiere probar versiones gratuitas antes de comprometerse a comprar.
+       \t\t\t\t\t\tValora la opinión de otros estudiantes y profesionales en su red.
+       \t\t\t\tComportamiento en línea:
+       \t\t\t\t\t\tActivo en LinkedIn para networking y búsqueda de oportunidades laborales.
+       \t\t\t\t\t\tParticipa en grupos de estudiantes de ingeniería en Facebook.
+       \t\t\t\t\t\tLee blogs de tecnología y gestión de proyectos.
+       \t\t\t\tFrustraciones actuales:
+       \t\t\t\t\t\tDificultad para coordinar reuniones efectivas con compañeros de proyecto.
+       \t\t\t\t\t\tPérdida de información importante debido a la falta de centralización en las herramientas utilizadas.
+       \t\t\t\tExpectativas del producto:
+       \t\t\t\t\t\tInterfaz intuitiva y fácil de usar.
+       \t\t\t\t\t\tFunciones de colaboración en tiempo real.
+       \t\t\t\t\t\tIntegración con otras herramientas comunes de productividad.
+       \t\t\t\tCita ficticia:
+       \t\t\t\t\t\t"Necesito una herramienta que no solo organice mis tareas, sino que también simplifique la comunicación y colaboración en equipo. Estoy ansioso por encontrar una solución que se adapte perfectamente a las demandas de mis proyectos y estudios."
+       \t\t\t\tCanales de comunicación:
+       \t\t\t\t\t\tLinkedIn para actualizaciones profesionales y recomendaciones.
+       \t\t\t\t\t\tGrupos de estudiantes en Facebook para discusiones informales.
+       \t\t\t\t\t\tCorreo electrónico para comunicaciones más formales y oportunidades de aprendizaje.
+       \t\t\t\tNotas adicionales:
+       \t\t\t\t\t\tJosé es un usuario tecnológicamente competente y está dispuesto a adoptar nuevas soluciones que mejoren su eficiencia y desempeño en la gestión de proyectos. Su experiencia laboral y académica lo hace consciente de la importancia de herramientas efectivas para enfrentar los desafíos cotidianos en su campo.
+
+      Solo una raíz,siempre deja como titulo el "User Persona", respeta las jerarquias: Demografía,Datos de trabajo,Desafíos y necesidades, Objetivos y deseos, Comportamiento de compra, Comportamiento en línea, Frustraciones actuales, Expectativas del producto, Cita ficticia, Canales de comunicación y Notas adicionales  , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -345,7 +286,7 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
         },
         {
           role: "assistant",
-          content: "Realiza sugerencias innovadoras para dar solución al tema plateado teniendo como base el framework Lean StartUp del tema:" + prompt
+          content: "Genera un User persona teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt
         }
       ],
       stream: true,

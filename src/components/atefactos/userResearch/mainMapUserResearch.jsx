@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Mermaid from "../../utils/Mermaid";
-import { UpDateArtifact, listadoProject, registerArtifact } from '../../utils/artifact';
-import { listado } from "../../utils/proyects";
+import Mermaid from "../../../utils/Mermaid";
+import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
+// import { listado } from "../../utils/proyects";
 
 let idProject
 let apikey
@@ -22,60 +22,13 @@ async function verProyecto(){
   console.log(proyecto.data.tema)
 }
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
-  // const getTema = async () => {
-  //   try {
-  //     const tema = await listado();
-  //     setProyecto(tema.data);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-    
-  //   getTema();
-
-  // }, []);
-
-
-  // const [nombre, setNombre] = useState('')
-  // const [prompts, setPrompts] = useState('')
-  // const [respuesta, setRespuesta] = useState('')
-
-  // const handleNombre = (e) => {
-  //   setNombre(e.target.value)
-  //   console.log(nombre);
-  // }
-
-  // const handlePrompts = (e) => {
-  // setPrompts(e.target.value)
-  // console.log(prompts);
-  // }
-
-  // const handleRespuesta = (e) => {
-  //     setRespuesta(e.target.value)
-  //     console.log(respuesta);
-  // }
-
-  // const onSubmit = async (e) => {
-  //     e.preventDefault();
-  //     const data = {
-  //         nombre,
-  //         prompts,
-  //         respuesta,
-          
-  //     }
-  //     const res = await registerArtifact(data)
-  //     console.log(data)
-  //     console.log(res)
-  //   };
 
   return (
     <div className="App">
       <div className="outer">
         <div>
           <div>Prompt de entrada</div>
-          <div className="textarea">
+          <div className="textarea text-extendido">
             <textarea
               id="prompt"
               name="prompt"
@@ -86,7 +39,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
         </div>
         <div>
           <div>Salida</div>
-          <div className="textarea">
+          <div className="textarea text-extendido">
             <textarea
               value={result}
               onChange={(e) => setResult(e.target.value)}
@@ -95,7 +48,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
         </div>
       </div>
       <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
-      <Mermaid key={result ? result.length : 0} chart={result} />
+      {/* <Mermaid key={result ? result.length : 0} chart={result} /> */}
     </div>
   );
 }
@@ -215,7 +168,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -236,7 +189,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -249,7 +202,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'brainstorming'
+    let nombre = 'User Research'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -267,61 +220,34 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-brainstorming mindmap
-mindmap
-\t\troot(("leisure activities weekend"))
-\t\t\t\t["spend time with friends"]
-\t\t\t\t::icon(fafa fa-users)
-\t\t\t\t\t\t("action activities")
-\t\t\t\t\t\t::icon(fafa fa-play)
-\t\t\t\t\t\t\t\t("dancing at night club")
-\t\t\t\t\t\t\t\t("going to a restaurant")
-\t\t\t\t\t\t\t\t("go to the theater")
-\t\t\t\t["spend time your self"]
-\t\t\t\t::icon(fa fa-fa-user)
-\t\t\t\t\t\t("meditation")
-\t\t\t\t\t\t::icon(fa fa-om)
-\t\t\t\t\t\t("\`take a sunbath ☀️\`")
-\t\t\t\t\t\t("reading a book")
-\t\t\t\t\t\t::icon(fa fa-book)
-text summary mindmap:
-mindmap
-\troot("Barack Obama")
-\t\t("Born August 4, 1961")
-\t\t::icon(fa fa-baby-carriage)
-\t\t("American Politician")
-\t\t\t::icon(fa fa-flag)
-\t\t\t\t("44th President of the United States")
-\t\t\t\t\t("2009 - 2017")
-\t\t("Democratic Party")
-\t\t\t::icon(fa fa-democrat)
-\t\t("First African-American President")
-cause and effects mindmap:
-mindmap
-\troot("Landlord sells apartment")
-\t\t::icon(fa fa-sell)
-\t\t("Renter must be notified of sale")
-\t\t::icon(fa fa-envelope)
-\t\t\t("Tenants may feel some uncertainty")
-\t\t\t::icon(fa fa-question-circle)
-\t\t("Notice periods must be observed")
-\t\t::icon(fa fa-calendar)
-\t\t\t("Landlord can submit notice of termination for personal use")
-\t\t\t::icon(fa fa-home)
-\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t::icon(fa fa-search)
-\t\t("New owner")
-\t\t::icon(fa fa-user)
-\t\t\t\t("New owner takes over existing rental agreement")
-\t\t\t\t::icon(fa fa-file-contract)
-\t\t\t\t\t\t("Tenant keeps previous apartment")
-\t\t\t\t\t\t::icon(fa fa-handshake)
-\t\t\t\t("New owner terminates newly concluded lease")
-\t\t\t\t::icon(fa fa-ban)
-\t\t\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+      `Cree un user Research  basado en las aportaciones del usuario como estos ejemplos:
+      \tTema: Asistente Virtual en la gestion de proyectos
+      \t\t\tDefinición de Objetivos
+      \t\t\t\tQueremos entender a fondo las necesidades y desafíos específicos que enfrentan los profesionales de la gestión de proyectos en su día a día. Además, buscamos validar la viabilidad y aceptación de un asistente virtual diseñado para mejorar la eficiencia y la efectividad en la gestión de proyectos.
+      \t\t\tElección de Métodos
+      \t\t\t\tOptaremos por una combinación de entrevistas y pruebas de usabilidad. Las entrevistas nos permitirán obtener percepciones cualitativas profundas sobre las experiencias, desafíos y expectativas de los usuarios. Las pruebas de usabilidad nos darán información práctica sobre la facilidad de uso y la eficacia del asistente virtual en situaciones simuladas.
+      \t\t\tRecopilación de Datos
+      \t\t\t\tRealizaremos entrevistas individuales con profesionales de la gestión de proyectos, abordando preguntas específicas sobre sus métodos actuales, desafíos comunes y posibles mejoras. También implementaremos pruebas de usabilidad, solicitando a los participantes que realicen tareas representativas utilizando el asistente virtual.
+      \t\t\tAnálisis de Datos
+      \t\t\t\tLos datos recopilados se analizarán para identificar patrones en las respuestas de los usuarios, destacando las áreas de mayor interés y las posibles mejoras necesarias en el diseño del asistente virtual. Buscaremos tendencias en términos de preferencias de funcionalidades y aspectos de usabilidad.
+      \t\t\tPresentación de Resultados
+      \t\t\t\tLos resultados se presentarán de manera clara y accesible a los equipos de desarrollo, marketing y ventas. Se proporcionarán recomendaciones basadas en los hallazgos, resaltando las oportunidades de mejora y destacando las características del asistente virtual que han recibido una respuesta positiva por parte de los usuarios.
+      
+      
+      text user Research:
+      \tTema: Mejora del medio amabiente
+      \t\t\tDefinición de Objetivos
+      \t\t\t\tLos usuarios que queremos investigar son individuos de diversas edades, niveles educativos y contextos socioeconómicos. Buscamos comprender sus valores ambientales, sus prácticas cotidianas relacionadas con el medio ambiente y cómo perciben su responsabilidad en la conservación ambiental.
+      \t\t\tElección de Métodos
+      \t\t\t\tOptaremos por una combinación de encuestas y grupos de discusión. Las encuestas nos permitirán recopilar datos cuantitativos sobre las actitudes generales y los comportamientos relacionados con el medio ambiente. Los grupos de discusión nos proporcionarán insights cualitativos más profundos, permitiéndonos explorar las motivaciones y preocupaciones subyacentes de los usuarios.
+      \t\t\tRecopilación de Datos
+      \t\t\t\tImplementaremos encuestas en línea para recopilar datos cuantitativos de un amplio grupo de participantes. Además, organizaremos grupos de discusión con muestras representativas de la población para obtener perspectivas más detalladas y comprender mejor las experiencias y emociones asociadas con las prácticas sostenibles.
+      \t\t\tAnálisis de Datos
+      \t\t\t\tLos datos recopilados se analizarán utilizando herramientas estadísticas para identificar patrones y correlaciones en las respuestas de la encuesta. Los temas emergentes y las opiniones expresadas en los grupos de discusión se analizarán cualitativamente para obtener una comprensión más profunda de las motivaciones y barreras relacionadas con la mejora del medio ambiente.
+      \t\t\tPresentación de Resultados
+      \t\t\t\tLos resultados se presentarán de manera clara y concisa a los interesados, incluyendo a los equipos de desarrollo, marketing y ventas. Se destacarán las áreas de oportunidad identificadas, proporcionando una base sólida para la implementación de estrategias efectivas de mejora ambiental y la creación de soluciones innovadoras que resuenen con las preocupaciones y valores de los usuarios.
+
+      Solo una raíz de tema y pon el titulo User Research, respeta la jerarquia: Definición de Objetivos,Elección de Métodos,Recopilación de Datos,Análisis de Datos y Presentación de Resultados , ademas despues de cada numero genera ":" , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -345,7 +271,7 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
         },
         {
           role: "assistant",
-          content: "Realiza sugerencias innovadoras para dar solución al tema plateado teniendo como base el framework Lean StartUp del tema:" + prompt
+          content: "Genera un User Research teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt
         }
       ],
       stream: true,

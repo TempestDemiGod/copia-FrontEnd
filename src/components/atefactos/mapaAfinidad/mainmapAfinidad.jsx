@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Mermaid from "../../utils/Mermaid";
-import { UpDateArtifact, listadoProject, registerArtifact } from '../../utils/artifact';
-import { listado } from "../../utils/proyects";
+import Mermaid from "../../../utils/Mermaid";
+import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
+// import { listado } from "../../utils/proyects";
 
 let idProject
 let apikey
@@ -22,53 +22,6 @@ async function verProyecto(){
   console.log(proyecto.data.tema)
 }
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
-  // const getTema = async () => {
-  //   try {
-  //     const tema = await listado();
-  //     setProyecto(tema.data);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-    
-  //   getTema();
-
-  // }, []);
-
-
-  // const [nombre, setNombre] = useState('')
-  // const [prompts, setPrompts] = useState('')
-  // const [respuesta, setRespuesta] = useState('')
-
-  // const handleNombre = (e) => {
-  //   setNombre(e.target.value)
-  //   console.log(nombre);
-  // }
-
-  // const handlePrompts = (e) => {
-  // setPrompts(e.target.value)
-  // console.log(prompts);
-  // }
-
-  // const handleRespuesta = (e) => {
-  //     setRespuesta(e.target.value)
-  //     console.log(respuesta);
-  // }
-
-  // const onSubmit = async (e) => {
-  //     e.preventDefault();
-  //     const data = {
-  //         nombre,
-  //         prompts,
-  //         respuesta,
-          
-  //     }
-  //     const res = await registerArtifact(data)
-  //     console.log(data)
-  //     console.log(res)
-  //   };
 
   return (
     <div className="App">
@@ -180,8 +133,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="maxTokens">Max de Tokens a usar:</label>
         <input
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="maxTokens"
+          className="form-control bg-dark text-white mb-3"
           name="maxTokens"
           value={maxTokens}
           onChange={handleMaxTokensChange}
@@ -192,9 +145,9 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="temperature">Temperatura:</label>
         <input
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="temperature"
           name="temperature"
+          className="form-control bg-dark text-white mb-3"
           value={temperature}
           onChange={handleTemperatureChange}
         />
@@ -204,9 +157,9 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="promptTemplate"
           name="promptTemplate"
+          className="form-control bg-dark text-white mb-3"
           value={promptTemplate}
           onChange={handlePromptTemplateChange}
         />
@@ -215,7 +168,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapaAfinidad({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -249,7 +202,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'brainstorming'
+    let nombre = 'Mapa de Afinidad'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -270,33 +223,31 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
       `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
 brainstorming mindmap
 mindmap
-\t\troot(("leisure activities weekend"))
-\t\t\t\t["spend time with friends"]
-\t\t\t\t::icon(fafa fa-users)
-\t\t\t\t\t\t("action activities")
-\t\t\t\t\t\t::icon(fafa fa-play)
-\t\t\t\t\t\t\t\t("dancing at night club")
-\t\t\t\t\t\t\t\t("going to a restaurant")
-\t\t\t\t\t\t\t\t("go to the theater")
-\t\t\t\t["spend time your self"]
-\t\t\t\t::icon(fa fa-fa-user)
-\t\t\t\t\t\t("meditation")
-\t\t\t\t\t\t::icon(fa fa-om)
-\t\t\t\t\t\t("\`take a sunbath ☀️\`")
-\t\t\t\t\t\t("reading a book")
-\t\t\t\t\t\t::icon(fa fa-book)
-text summary mindmap:
-mindmap
-\troot("Barack Obama")
-\t\t("Born August 4, 1961")
-\t\t::icon(fa fa-baby-carriage)
-\t\t("American Politician")
-\t\t\t::icon(fa fa-flag)
-\t\t\t\t("44th President of the United States")
-\t\t\t\t\t("2009 - 2017")
-\t\t("Democratic Party")
-\t\t\t::icon(fa fa-democrat)
-\t\t("First African-American President")
+\t\t\troot((Asistente virtual para la gestión de proyectos de innovación))
+\t\t\t\tIdea de solución 1:Integración de Tecnologías Avanzadas
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tExplorar la incorporación de inteligencia artificial y aprendizaje automático.
+\t\t\t\t\t\t\tInvestigar la viabilidad de la integración de reconocimiento de voz y procesamiento de lenguaje natural.
+\t\t\t\tIdea de solución 2:Personalización y Adaptabilidad
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tDesarrollar funciones personalizables según las necesidades específicas del proyecto.
+\t\t\t\t\t\t\tImplementar capacidades de adaptación a diferentes industrias y contextos.
+\t\t\t\tIdea de solución 3: Colaboración y Comunicación Efectiva
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tDiseñar herramientas de colaboración integradas para equipos dispersos.
+\t\t\t\t\t\t\tMejorar las funciones de comunicación, notificaciones y actualizaciones en tiempo real.
+\t\t\t\tIdea de solución 4: Evaluación Continua y Retroalimentación del Usuario
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tEstablecer un sistema de retroalimentación en tiempo real para evaluar la eficacia del asistente.
+\t\t\t\t\t\t\tImplementar encuestas periódicas y análisis de uso para recopilar comentarios de los usuarios.
+\t\t\t\tIdea de solución 5: Integración con Otras Herramientas de Gestión
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tInvestigar y establecer integraciones con plataformas de gestión de proyectos existentes.
+\t\t\t\t\t\t\tPermitir una transición fluida de datos entre el asistente y otras herramientas utilizadas por los usuarios.
+\t\t\t\tIdea de solución 6: Capacitación Continua del Asistente
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tImplementar un sistema de aprendizaje continuo para mejorar la capacidad predictiva.
+\t\t\t\t\t\t\tDesarrollar algoritmos que se adapten y evolucionen con base en la experiencia y los cambios en el entorno del proyecto.
 cause and effects mindmap:
 mindmap
 \troot("Landlord sells apartment")
@@ -321,7 +272,7 @@ mindmap
 \t\t\t\t::icon(fa fa-ban)
 \t\t\t\t\t\t("Tenant has to look for a new apartment")
 \t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+Solo una raíz, deja la palabra mindmap como encabezado ,ademas sigue la estructura de idea de solucción y acciones para solucionanrlo, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -345,7 +296,7 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
         },
         {
           role: "assistant",
-          content: "Realiza sugerencias innovadoras para dar solución al tema plateado teniendo como base el framework Lean StartUp del tema:" + prompt
+          content: "Me gustaria que representes al menos 6 ideas desarrollar soluciones al problemas mencionado:" + prompt +"luego, generar una lista con las acciones que pueden llevar a solucionar el problema"
         }
       ],
       stream: true,
@@ -446,7 +397,7 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>guardar mapa</button>
+        <button className="tab-button btn btn-outline-success"  onClick={() => guardarMapa()}>guardar mapa</button>
         <button
           className="tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}

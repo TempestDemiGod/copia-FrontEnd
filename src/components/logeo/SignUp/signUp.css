@@ -1,3 +1,19 @@
+.contenedor-registro{
+    height: 30vw;
+    overflow-y: scroll;
+}
+.contenedor-registro::-webkit-scrollbar{
+    width: .2em;
+    opacity: 0.3;
+}
+.contenedor-registro::-webkit-scrollbar-track{
+    background: rgb(244, 244, 245);
+    
+}
+.contenedor-registro::-webkit-scrollbar-thumb{
+    background-color: #e7af06;
+    border-radius: 4rem;
+}
 @media screen and (max-height: 710px){
     .hola-02{
         width: 80%;
@@ -23,4 +39,10 @@
     .hola-02{
         height: 50%;
     }
+}
+
+.error{
+    display: block;
+    color: tomato;
+    font-size: x-small;
 }

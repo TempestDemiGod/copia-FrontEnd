@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Mermaid from "../../utils/Mermaid";
-import { UpDateArtifact, listadoProject, registerArtifact } from '../../utils/artifact';
-import { listado } from "../../utils/proyects";
+import Mermaid from "../../../utils/Mermaid";
+import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
+// import { listado } from "../../utils/proyects";
 
 let idProject
 let apikey
@@ -126,6 +126,8 @@ function SettingsTab({
     }
   };
 console.log('funciono chamo .. ' + idProject)
+console.log('funciono chamo .. ' + respuestaArtefactoID )
+
   function extractFloatFromString(str) {
     str = str.replace(',', '.'); // Reemplazar coma con punto como separador decimal
     const result = str.match(/^-?(\d+)?(\.\d*)?/); // Une dígitos opcionales antes y después del punto decimal
@@ -180,8 +182,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="maxTokens">Max de Tokens a usar:</label>
         <input
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="maxTokens"
+          className="form-control bg-dark text-white mb-3"
           name="maxTokens"
           value={maxTokens}
           onChange={handleMaxTokensChange}
@@ -192,8 +194,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="temperature">Temperatura:</label>
         <input
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="temperature"
+          className="form-control bg-dark text-white mb-3"
           name="temperature"
           value={temperature}
           onChange={handleTemperatureChange}
@@ -204,8 +206,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="promptTemplate"
+          className="form-control bg-dark text-white mb-3"
           name="promptTemplate"
           value={promptTemplate}
           onChange={handlePromptTemplateChange}
@@ -215,7 +217,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapaEmpatia({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -225,6 +227,8 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
     respuestaArtefactoID  = ArtecatoDB
     // verProyecto()
     setToken(apikey)
+    console.log('respuestaArtefactoID')
+    console.log(respuestaArtefactoID)
   },[]);
   useEffect(() => {
     setPrompt(temaproyecto)
@@ -249,7 +253,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'brainstorming'
+    let nombre = 'Mapa de Empatia'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -267,61 +271,35 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-brainstorming mindmap
+      `Cree un mapa mental  basado en las aportaciones del usuario como estos ejemplos:
+Mapa de empatia mindmap
 mindmap
-\t\troot(("leisure activities weekend"))
-\t\t\t\t["spend time with friends"]
-\t\t\t\t::icon(fafa fa-users)
-\t\t\t\t\t\t("action activities")
-\t\t\t\t\t\t::icon(fafa fa-play)
-\t\t\t\t\t\t\t\t("dancing at night club")
-\t\t\t\t\t\t\t\t("going to a restaurant")
-\t\t\t\t\t\t\t\t("go to the theater")
-\t\t\t\t["spend time your self"]
-\t\t\t\t::icon(fa fa-fa-user)
-\t\t\t\t\t\t("meditation")
-\t\t\t\t\t\t::icon(fa fa-om)
-\t\t\t\t\t\t("\`take a sunbath ☀️\`")
-\t\t\t\t\t\t("reading a book")
-\t\t\t\t\t\t::icon(fa fa-book)
-text summary mindmap:
-mindmap
-\troot("Barack Obama")
-\t\t("Born August 4, 1961")
-\t\t::icon(fa fa-baby-carriage)
-\t\t("American Politician")
-\t\t\t::icon(fa fa-flag)
-\t\t\t\t("44th President of the United States")
-\t\t\t\t\t("2009 - 2017")
-\t\t("Democratic Party")
-\t\t\t::icon(fa fa-democrat)
-\t\t("First African-American President")
-cause and effects mindmap:
-mindmap
-\troot("Landlord sells apartment")
-\t\t::icon(fa fa-sell)
-\t\t("Renter must be notified of sale")
-\t\t::icon(fa fa-envelope)
-\t\t\t("Tenants may feel some uncertainty")
-\t\t\t::icon(fa fa-question-circle)
-\t\t("Notice periods must be observed")
-\t\t::icon(fa fa-calendar)
-\t\t\t("Landlord can submit notice of termination for personal use")
-\t\t\t::icon(fa fa-home)
-\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t::icon(fa fa-search)
-\t\t("New owner")
-\t\t::icon(fa fa-user)
-\t\t\t\t("New owner takes over existing rental agreement")
-\t\t\t\t::icon(fa fa-file-contract)
-\t\t\t\t\t\t("Tenant keeps previous apartment")
-\t\t\t\t\t\t::icon(fa fa-handshake)
-\t\t\t\t("New owner terminates newly concluded lease")
-\t\t\t\t::icon(fa fa-ban)
-\t\t\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+\t\t\troot((Asistente virtual para la gestión de proyectos de innovación))
+\t\t\t\tPersona o segmento de usuario que interviene con el problema?
+\t\t\t\t\tEmprendedores y equipos de proyectos innovadores.
+\t\t\t\t\t\tStartups en fase inicial.
+\t\t\t\t\t\tEquipos de innovación en empresas establecidas.
+\t\t\t\tLo que ven?
+\t\t\t\t\tInterfaz intuitiva y amigable.
+\t\t\t\t\t\tVisualización clara del progreso del proyecto.
+\t\t\t\t\t\tHerramientas de colaboración y comunicación integradas.
+\t\t\t\tLo que escuchan o oyen?
+\t\t\t\t\tNecesidad de funciones personalizables según el tipo de proyecto.
+\t\t\t\t\t\tRetroalimentación sobre la eficacia de las sugerencias del asistente.
+\t\t\t\t\t\tSolicitudes de integración con otras herramientas de gestión.
+\t\t\t\tLo que sugieren los usuarios?
+\t\t\t\t\tMayor capacidad predictiva del asistente.
+\t\t\t\t\t\tMejoras en la adaptabilidad a diferentes industrias.
+\t\t\t\t\t\tRetroalimentación en tiempo real sobre el rendimiento del equipo.
+\t\t\t\tLos esfuerzos que se sugiere para afrontar el tema
+\t\t\t\t\tInvestigación continua de tecnologías emergentes.
+\t\t\t\t\t\tColaboración con expertos en gestión de proyectos.
+\t\t\t\t\t\tImplementación de actualizaciones frecuentes basadas en retroalimentación.
+\t\t\t\tLos resultados que deseamos obtener
+\t\t\t\t\tAumento en la eficiencia y productividad de los proyectos.
+\t\t\t\t\t\tReducción de errores y retrabajo.
+\t\t\t\t\t\tMayor satisfacción y retención de usuarios.
+Solo una raíz, deja a "mindmap" como encabezado, evita poner "mermaid" en la estructura y manten los nodos: Persona o segmento de usuario que interviene con el problema?, Lo que ven?, Lo que escuchan o oyen?, Lo que sugieren los usuarios?, Los esfuerzos que se sugiere para afrontar el tema y Los resultados que deseamos obtener. Evitar los tipos de nodos "[", " "-" "mermaid"( "," "-" . No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -345,8 +323,9 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
         },
         {
           role: "assistant",
-          content: "Realiza sugerencias innovadoras para dar solución al tema plateado teniendo como base el framework Lean StartUp del tema:" + prompt
+          content: "Realiza un mapa de empatia del tema:" + prompt
         }
+
       ],
       stream: true,
       max_tokens: maxTokens,

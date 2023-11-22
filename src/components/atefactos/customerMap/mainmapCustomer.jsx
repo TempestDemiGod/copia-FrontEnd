@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Mermaid from "../../utils/Mermaid";
-import { UpDateArtifact, listadoProject, registerArtifact } from '../../utils/artifact';
-import { listado } from "../../utils/proyects";
+import Mermaid from "../../../utils/Mermaid";
+import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
+import "../../mapasEquilibrados/brainstorming.css";
 
 let idProject
 let apikey
@@ -153,9 +153,9 @@ console.log('funciono chamo .. ' + idProject)
       <div>OpenAI API_KEY</div>
       <div>
         <input
+          className="form-control bg-dark text-white mb-3"
           type="password"
           id="token"
-          className="form-control bg-dark text-white mb-3"
           name="token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
@@ -164,9 +164,9 @@ console.log('funciono chamo .. ' + idProject)
       <div>
         <label htmlFor="model">Motor GPT:</label>
         <select
+          className="form-control bg-dark text-white mb-3"
           name="model"
           id="model"
-          className="form-control bg-dark text-white mb-3"
           value={model}
           onChange={(e) => setModel(e.target.value)}
         >
@@ -215,7 +215,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapaCustomer({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -249,7 +249,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'brainstorming'
+    let nombre = 'Customer Journey Map'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -268,60 +268,54 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
       `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-brainstorming mindmap
-mindmap
-\t\troot(("leisure activities weekend"))
-\t\t\t\t["spend time with friends"]
-\t\t\t\t::icon(fafa fa-users)
-\t\t\t\t\t\t("action activities")
-\t\t\t\t\t\t::icon(fafa fa-play)
-\t\t\t\t\t\t\t\t("dancing at night club")
-\t\t\t\t\t\t\t\t("going to a restaurant")
-\t\t\t\t\t\t\t\t("go to the theater")
-\t\t\t\t["spend time your self"]
-\t\t\t\t::icon(fa fa-fa-user)
-\t\t\t\t\t\t("meditation")
-\t\t\t\t\t\t::icon(fa fa-om)
-\t\t\t\t\t\t("\`take a sunbath ☀️\`")
-\t\t\t\t\t\t("reading a book")
-\t\t\t\t\t\t::icon(fa fa-book)
-text summary mindmap:
-mindmap
-\troot("Barack Obama")
-\t\t("Born August 4, 1961")
-\t\t::icon(fa fa-baby-carriage)
-\t\t("American Politician")
-\t\t\t::icon(fa fa-flag)
-\t\t\t\t("44th President of the United States")
-\t\t\t\t\t("2009 - 2017")
-\t\t("Democratic Party")
-\t\t\t::icon(fa fa-democrat)
-\t\t("First African-American President")
-cause and effects mindmap:
-mindmap
-\troot("Landlord sells apartment")
-\t\t::icon(fa fa-sell)
-\t\t("Renter must be notified of sale")
-\t\t::icon(fa fa-envelope)
-\t\t\t("Tenants may feel some uncertainty")
-\t\t\t::icon(fa fa-question-circle)
-\t\t("Notice periods must be observed")
-\t\t::icon(fa fa-calendar)
-\t\t\t("Landlord can submit notice of termination for personal use")
-\t\t\t::icon(fa fa-home)
-\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t::icon(fa fa-search)
-\t\t("New owner")
-\t\t::icon(fa fa-user)
-\t\t\t\t("New owner takes over existing rental agreement")
-\t\t\t\t::icon(fa fa-file-contract)
-\t\t\t\t\t\t("Tenant keeps previous apartment")
-\t\t\t\t\t\t::icon(fa fa-handshake)
-\t\t\t\t("New owner terminates newly concluded lease")
-\t\t\t\t::icon(fa fa-ban)
-\t\t\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+journey map
+journey
+\t\t\t\t\ttitle Asista a una conferencia tecnológica
+\t\t\t\t\tsection Pre-Conferencia
+\t\t\t\t\t\t\tCompra una Entrada: 4: Asistentes, Punto de Venta
+\t\t\t\t\t\t\Consultar Horario antes de la Conferencia: 6: Asistentes, Sitio
+\t\t\t\t\t\t\tDesarrollo de prototipos: 4: Me, Cat
+\t\t\t\t\tsection Mañana
+\t\t\t\t\t\t\tRegistro en la Conferencia: 5: Asistentes, Voluntarios
+\t\t\t\t\t\t\tConsultar horario en la conferencia: 4: asistentes, aplicación móvil
+\t\t\t\t\t\t\tAsistir a la Charla: 5: Asistentes, Oradores, Voluntarios
+\t\t\t\t\tsection tarde 
+\t\t\t\t\t\t\t Almuerzo: 3: Asistentes, Voluntarios
+\t\t\t\t\t\t\t"Pasillo de pasillo": 5: Asistentes, Voluntarios
+\t\t\t\t\t\t\tPelícula posterior a la conferencia: 12: asistentes, voluntarios, orador
+text summary journey:
+journey
+\t\t\t\t\ttitle Realización de un proyecto binefico
+\t\t\t\t\tsection Intercambio de Bienes: 
+\t\t\t\t\t\t\tPrepara y ofrecer un bien: 2: dias
+\t\t\t\t\t\t\tIndicar especffcacnnes del blen: 4: dias
+\t\t\t\t\t\t\tBuscar bien de Interes: 5 : dias
+\t\t\t\t\t\t\tLeer y observar detalles del ben: 3: dias
+\t\t\t\t\t\t\tProponer oferta de Intercambio: 2: dias
+\t\t\t\t\t\t\tConfirmar Intercambio: 1: dias
+\t\t\t\t\t\t\tCoordinar entrega de bien: 2: dias
+\t\t\t\t\t\t\tElegir método de pago: 4: dias
+\t\t\t\t\t\t\tHacer Intercambio de bienes: 2: dias
+\t\t\t\t\tsection Envio de paquetes
+\t\t\t\t\t\t\tPreparar el paquete: 2: dias
+\t\t\t\t\t\t\tHacer cola para envio: 6: dias
+\t\t\t\t\t\t\tEspecificar datos del remitente: 2: dias
+\t\t\t\t\t\t\tEspecificar datos de envto: 1: dias
+\t\t\t\t\t\t\tElegir método de pago: 2: dias
+\t\t\t\t\t\t\tRealizar pago: 1: dias
+\t\t\t\t\t\t\tEntregar paquete: 5: dias
+\t\t\t\t\t\t\tRecibir comprobante: 2: dias
+\t\t\t\t\t\t\tRecibir fecha de entrega: 3: dias
+\t\t\t\t\tsection Recepcion de paquetes
+\t\t\t\t\t\t\tEntrar a la plataforma de envio: 2: dias
+\t\t\t\t\t\t\tHacer seguimiento del paquete: 2: dias
+\t\t\t\t\t\t\tEsperar llegada del paquete: 1: dias
+\t\t\t\t\t\t\tRecibil el paquete: 2: dias
+\t\t\t\t\t\t\tComprobar estado del bien: 1: dias
+\t\t\t\t\t\t\tConfirmar la entrega del paquete: 2: dias
+
+
+Solo una raíz, deja la palabra journey como encabezado y respeta la jerarquia title y section, ademas despues de cada numero genera ":" , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -345,7 +339,7 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
         },
         {
           role: "assistant",
-          content: "Realiza sugerencias innovadoras para dar solución al tema plateado teniendo como base el framework Lean StartUp del tema:" + prompt
+          content: "Genera una lista de actividades que den solucion al problema con las estimaciones no mayor de 7 dias del tema:" + prompt
         }
       ],
       stream: true,
@@ -446,7 +440,7 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>guardar mapa</button>
+        <button className="tab-button btn btn-outline-success"  onClick={() => guardarMapa()}>guardar mapa</button>
         <button
           className="tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Mermaid from "../../utils/Mermaid";
-import { UpDateArtifact, listadoProject, registerArtifact } from '../../utils/artifact';
-import { listado } from "../../utils/proyects";
+import Mermaid from "../../../utils/Mermaid";
+import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
+// import { listado } from "../../utils/proyects";
 
 let idProject
 let apikey
@@ -22,60 +22,13 @@ async function verProyecto(){
   console.log(proyecto.data.tema)
 }
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
-  // const getTema = async () => {
-  //   try {
-  //     const tema = await listado();
-  //     setProyecto(tema.data);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-    
-  //   getTema();
-
-  // }, []);
-
-
-  // const [nombre, setNombre] = useState('')
-  // const [prompts, setPrompts] = useState('')
-  // const [respuesta, setRespuesta] = useState('')
-
-  // const handleNombre = (e) => {
-  //   setNombre(e.target.value)
-  //   console.log(nombre);
-  // }
-
-  // const handlePrompts = (e) => {
-  // setPrompts(e.target.value)
-  // console.log(prompts);
-  // }
-
-  // const handleRespuesta = (e) => {
-  //     setRespuesta(e.target.value)
-  //     console.log(respuesta);
-  // }
-
-  // const onSubmit = async (e) => {
-  //     e.preventDefault();
-  //     const data = {
-  //         nombre,
-  //         prompts,
-  //         respuesta,
-          
-  //     }
-  //     const res = await registerArtifact(data)
-  //     console.log(data)
-  //     console.log(res)
-  //   };
 
   return (
     <div className="App">
       <div className="outer">
         <div>
           <div>Prompt de entrada</div>
-          <div className="textarea">
+          <div className="textarea text-extendido">
             <textarea
               id="prompt"
               name="prompt"
@@ -86,7 +39,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
         </div>
         <div>
           <div>Salida</div>
-          <div className="textarea">
+          <div className="textarea text-extendido">
             <textarea
               value={result}
               onChange={(e) => setResult(e.target.value)}
@@ -95,7 +48,6 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
         </div>
       </div>
       <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
-      <Mermaid key={result ? result.length : 0} chart={result} />
     </div>
   );
 }
@@ -153,9 +105,9 @@ console.log('funciono chamo .. ' + idProject)
       <div>OpenAI API_KEY</div>
       <div>
         <input
+          className="form-control bg-dark text-white mb-3"
           type="password"
           id="token"
-          className="form-control bg-dark text-white mb-3"
           name="token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
@@ -165,8 +117,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="model">Motor GPT:</label>
         <select
           name="model"
-          id="model"
           className="form-control bg-dark text-white mb-3"
+          id="model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
         >
@@ -215,7 +167,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -236,7 +188,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -249,7 +201,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'brainstorming'
+    let nombre = 'Mapa de walt disney'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -267,61 +219,32 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-brainstorming mindmap
-mindmap
-\t\troot(("leisure activities weekend"))
-\t\t\t\t["spend time with friends"]
-\t\t\t\t::icon(fafa fa-users)
-\t\t\t\t\t\t("action activities")
-\t\t\t\t\t\t::icon(fafa fa-play)
-\t\t\t\t\t\t\t\t("dancing at night club")
-\t\t\t\t\t\t\t\t("going to a restaurant")
-\t\t\t\t\t\t\t\t("go to the theater")
-\t\t\t\t["spend time your self"]
-\t\t\t\t::icon(fa fa-fa-user)
-\t\t\t\t\t\t("meditation")
-\t\t\t\t\t\t::icon(fa fa-om)
-\t\t\t\t\t\t("\`take a sunbath ☀️\`")
-\t\t\t\t\t\t("reading a book")
-\t\t\t\t\t\t::icon(fa fa-book)
-text summary mindmap:
-mindmap
-\troot("Barack Obama")
-\t\t("Born August 4, 1961")
-\t\t::icon(fa fa-baby-carriage)
-\t\t("American Politician")
-\t\t\t::icon(fa fa-flag)
-\t\t\t\t("44th President of the United States")
-\t\t\t\t\t("2009 - 2017")
-\t\t("Democratic Party")
-\t\t\t::icon(fa fa-democrat)
-\t\t("First African-American President")
-cause and effects mindmap:
-mindmap
-\troot("Landlord sells apartment")
-\t\t::icon(fa fa-sell)
-\t\t("Renter must be notified of sale")
-\t\t::icon(fa fa-envelope)
-\t\t\t("Tenants may feel some uncertainty")
-\t\t\t::icon(fa fa-question-circle)
-\t\t("Notice periods must be observed")
-\t\t::icon(fa fa-calendar)
-\t\t\t("Landlord can submit notice of termination for personal use")
-\t\t\t::icon(fa fa-home)
-\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t::icon(fa fa-search)
-\t\t("New owner")
-\t\t::icon(fa fa-user)
-\t\t\t\t("New owner takes over existing rental agreement")
-\t\t\t\t::icon(fa fa-file-contract)
-\t\t\t\t\t\t("Tenant keeps previous apartment")
-\t\t\t\t\t\t::icon(fa fa-handshake)
-\t\t\t\t("New owner terminates newly concluded lease")
-\t\t\t\t::icon(fa fa-ban)
-\t\t\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+      `Cree un diagrama de Walt Disney basado en las aportaciones del usuario como estos ejemplos:
+       Método Walt Disney: 'Asistente virtual para la gestion de proyectos de innovación'
+       \t\tFase del Soñador:
+       \t\t\t\t¿Cuál es la visión más audaz e inspiradora para nuestro proyecto?
+       \t\t\t\t\t\tLa visión más audaz para nuestro proyecto es transformar la forma en que se gestionan los proyectos de innovación mediante la creación de un asistente virtual altamente inteligente. Imaginemos un futuro donde la inteligencia artificial guía y potencia la creatividad de los equipos, acelerando el proceso de innovación de manera sorprendente.
+       \t\t\t\t¿Cuáles son los elementos clave de un escenario ideal sin restricciones?
+       \t\t\t\t\t\tEn un escenario ideal sin restricciones, nuestro asistente virtual sería capaz de comprender y generar ideas innovadoras, gestionar automáticamente los recursos necesarios, y adaptarse de manera proactiva a los cambios en el entorno. Además, facilitaría la colaboración entre equipos de manera fluida, independientemente de su ubicación geográfica.
+       \t\t\t\t¿Cómo se vería el éxito absoluto sin preocuparnos por limitaciones prácticas?
+       \t\t\t\t\t\tEl éxito absoluto se reflejaría en la transformación radical de la eficiencia y la efectividad en la gestión de proyectos de innovación. Nuestro asistente virtual sería reconocido como un catalizador clave para el desarrollo de ideas revolucionarias, llevando a la empresa a la vanguardia de la innovación global.
+       \t\tFase del Realista:
+       \t\t\t\t¿Cómo podemos implementar concretamente las ideas generadas en la fase del Soñador?
+       \t\t\t\t\t\tPara implementar las ideas generadas, debemos comenzar por desarrollar un prototipo funcional del asistente virtual. Seleccionaríamos un equipo multidisciplinario, asignaríamos roles y estableceríamos un cronograma detallado para el desarrollo iterativo del prototipo.
+       \t\t\t\t¿Cuáles son los recursos necesarios y su disponibilidad?
+       \t\t\t\t\t\tNecesitamos recursos técnicos como desarrolladores de inteligencia artificial, programadores, y expertos en aprendizaje automático. Además, se requieren recursos financieros para la investigación y desarrollo. La disponibilidad de estos recursos dependerá de las alianzas estratégicas y la inversión que podamos asegurar.
+       \t\t\t\t¿Cuáles son los pasos prácticos para llevar a cabo la visión de manera realista?
+       \t\t\t\t\t\tLos pasos prácticos incluyen el desarrollo incremental del asistente, pruebas continuas con usuarios reales, y ajustes basados en retroalimentación. Además, debemos establecer alianzas con empresas de tecnología para acceder a recursos avanzados y garantizar la seguridad y ética en el uso de la inteligencia artificial.
+       \t\tFase del Crítico:
+       \t\t\t\t¿Cuáles son los posibles obstáculos que podríamos enfrentar durante la implementación?
+       \t\t\t\t\t\tPosibles obstáculos podrían incluir la resistencia al cambio por parte de los equipos, problemas éticos relacionados con la inteligencia artificial, y desafíos regulatorios. La identificación y mitigación proactiva de estos obstáculos será crucial.
+       \t\t\t\t¿Hay aspectos del plan que podrían no ser prácticos o eficientes?
+       \t\t\t\t\t\tEs posible que algunos aspectos del plan inicial, como la velocidad de adopción por parte de los equipos, no sean tan eficientes como se espera. Se deben realizar evaluaciones periódicas y ajustar el plan según sea necesario para garantizar la eficiencia continua.
+       \t\t\t\t¿Qué ajustes y mejoras podríamos realizar para optimizar la viabilidad y el éxito del proyecto?
+       \t\t\t\t\t\tPara optimizar la viabilidad y el éxito, podríamos mejorar la interfaz del asistente para hacerla más intuitiva, proporcionar formación continua a los usuarios, y realizar actualizaciones regulares basadas en el feedback. Además, la colaboración con expertos en ética de la inteligencia artificial podría mejorar la aceptación y confianza en el sistema.
+      
+
+      Solo una raíz, deja Método Walt Disney y agrega el tema como encabezado ,ademas sigue las tres fases: Fase del Soñador, Fase del Realista y Fase del Crítico. No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -345,7 +268,7 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
         },
         {
           role: "assistant",
-          content: "Realiza sugerencias innovadoras para dar solución al tema plateado teniendo como base el framework Lean StartUp del tema:" + prompt
+          content: "Me gustaria que des respuesta a las tres fase: Fase del Soñador, Fase del Realista y Fase del Crítico del Metodo Walt Disney segun el tema :" + prompt
         }
       ],
       stream: true,

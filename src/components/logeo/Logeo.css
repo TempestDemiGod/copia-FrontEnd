@@ -54,6 +54,12 @@
     height: 100vh;
     border-radius: 2vw 0 0 2vw;
 }
+.punto-cambio{
+    text-decoration: none;
+    cursor: pointer;
+    color: rgb(230, 92, 46);
+    font-weight: bold;
+}
 .btn-logeo{
     margin-top: 2vw;
     color: white;
@@ -112,7 +118,6 @@ span{
         box-shadow: 0 0 60px rgb(74, 211, 188);
     }
 }
-
 @media screen and (max-height: 600px){
     span{
         transform: translatey(-4vh);
