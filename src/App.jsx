@@ -6,7 +6,7 @@ import { MenuMain } from './components/navbar/Navbar'
 import  {Logeo} from './components/logeo/Logeo'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Home}  from './components/home/home'
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Brainstorming } from './components/mapasEquilibrados/brainstorming'
 import Customer from './components/atefactos/customerMap/customerMap'
 import Afinidad from './components/atefactos/mapaAfinidad/mapaAfinidad'
@@ -26,21 +26,43 @@ function App(){
   }
   return(
     <>   
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Logeo />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/brainstorming" element={<Brainstorming />} />
-          <Route path="/customer" element={<Customer />} />
-          <Route path="/afinidad" element={<Afinidad />} />
-          <Route path="/empatia" element={<Empatia />} />
-          <Route path="/impacto" element={<Impacto />} />
-          <Route path="/User-Research" element={<UserResearch />} />
-          <Route path="/User-Persona" element={<UserPersona />} />
-          <Route path="/Arquetipo" element={<Sombrero />} />
-          <Route path="/Disney" element={<Disney />} />
-        </Routes>
-      </HashRouter>
+          <Route path="/" element={
+            <Logeo />
+          } />
+          <Route path="/Home" element={
+            <Home />
+          } />
+          <Route path="/brainstorming" element={
+            <Brainstorming />
+          } />
+          <Route path="/customer" element={
+            <Customer />
+          } />
+          <Route path="/afinidad" element={
+            <Afinidad />
+          } />
+          <Route path="/empatia" element={
+            <Empatia />
+          } />
+          <Route path="/impacto" element={
+            <Impacto />
+          } />
+          <Route path="/User-Research" element={
+            <UserResearch />
+          } />
+          <Route path="/User-Persona" element={
+            <UserPersona />
+          } />
+          <Route path="/Arquetipo" element={
+            <Sombrero />
+          } />
+          <Route path="/Disney" element={
+            <Disney />
+          } />
+          </Routes>
+      </BrowserRouter>
     </>
   ) 
 }
