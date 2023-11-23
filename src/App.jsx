@@ -6,7 +6,7 @@ import { MenuMain } from './components/navbar/Navbar'
 import  {Logeo} from './components/logeo/Logeo'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Home}  from './components/home/home'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
 import { Brainstorming } from './components/mapasEquilibrados/brainstorming'
 import Customer from './components/atefactos/customerMap/customerMap'
 import Afinidad from './components/atefactos/mapaAfinidad/mapaAfinidad'
