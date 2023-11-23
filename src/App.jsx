@@ -26,43 +26,21 @@ function App(){
   }
   return(
     <>   
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
-          <Route path="/" element={
-            <Logeo />
-          } />
-          <Route path="/Home" element={
-            <Home />
-          } />
-          <Route path="/brainstorming" element={
-            <Brainstorming />
-          } />
-          <Route path="/customer" element={
-            <Customer />
-          } />
-          <Route path="/afinidad" element={
-            <Afinidad />
-          } />
-          <Route path="/empatia" element={
-            <Empatia />
-          } />
-          <Route path="/impacto" element={
-            <Impacto />
-          } />
-          <Route path="/User-Research" element={
-            <UserResearch />
-          } />
-          <Route path="/User-Persona" element={
-            <UserPersona />
-          } />
-          <Route path="/Arquetipo" element={
-            <Sombrero />
-          } />
-          <Route path="/Disney" element={
-            <Disney />
-          } />
-          </Routes>
-      </BrowserRouter>
+          <Route path="/" element={<Logeo />} />
+          <Route path="/Home" element={<Home />} />
+          <Route path="/brainstorming" element={<Brainstorming />} />
+          <Route path="/customer" element={<Customer />} />
+          <Route path="/afinidad" element={<Afinidad />} />
+          <Route path="/empatia" element={<Empatia />} />
+          <Route path="/impacto" element={<Impacto />} />
+          <Route path="/User-Research" element={<UserResearch />} />
+          <Route path="/User-Persona" element={<UserPersona />} />
+          <Route path="/Arquetipo" element={<Sombrero />} />
+          <Route path="/Disney" element={<Disney />} />
+        </Routes>
+      </HashRouter>
     </>
   ) 
 }
